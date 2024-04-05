@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widht=device-widht, initial-scale=1.0">
+    <title>Perpustakaan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        #info {
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>Informasi Mahasiswa</h1>
+        <p>Nama: <span id="nama">Farhan Hidayat</span></p>
+        <p>NIM: <span id="NIM">6701213112</span></p>
+        <p>Kelas: <span id="Kelas">D3SI-46-02</span></p>
+    </div>
+
+    <div id="from">
+        <label for="jumlah">Jumlah:</label>
+        <input type="number" id="jumlah" name="jumlah"><br><br>
+
+        <label for="buku">Pilih Buku:</label>
+        <select id="buku">
+            <option value="Sherlock">Sherlock</option>
+            <option value="Lupin">Lupin</option>
+            <option value="Aladin">Aladin</option>
+        </select><br><br>
+
+        <button onclick="cekStok()">Cek Stok Buku</button>
+    </div>
+
+    <script>
+        let buku =[
+            {"nama": "Sherlock", "Jumlah": 2},
+            {"nama": "Lupin", "Jumlah": 2},
+            {"nama": "Aladin", "Jumlah": 2}
+        ];
+
+        function cekStok() {
+            let jumlahInput = document.getElementById('jumlah'). value;
+            let bukuTerpilih = document.getElementById('buku'). value;
+            let bukuDitemukan = false;
+
+            if(jumlahInput === '') {
+                alert('Mohon isi jumlah buku yang ingin dipinjam'.);
+                return;
+            }
+
+            for (let i = 0; i < buku.length; i++) {
+                if (buku[i].nama === bukuTerpilih) {
+                    bukuDitemukan = true;
+                    if (parseInt(jumlahInput) > buku[i].jumlah) {
+                        alert('Maaf, buku tidak tersedia dalam jumlah yang mencukupi.');
+                    } else {
+                        alert('Silahkan ambil buku anda.');
+                    }
+                    break;
+                }
+            }
+
+            if (!bukuDitemukan) {
+                alert('Buku tidak ditemukan dalam daftar.');
+            }
+        }
+    </script>
+</body>
+</html>
